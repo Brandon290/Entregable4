@@ -1,0 +1,22 @@
+﻿@page "/"
+@using Entregable4.Model;
+
+
+<h2>Bienvenidos a la pagina de</h2> 
+@foreach (Usuario nombre in nombres)
+{
+    
+    <h2>@nombre.name</h2>
+}
+
+
+<p style="text-align: center;" >Mucho más que una tecnologia</p>
+
+@code{
+
+private List<Usuario> nombres;
+
+
+}
+    
+

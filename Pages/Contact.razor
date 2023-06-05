@@ -1,0 +1,70 @@
+@page "/PageContact"
+
+<form @onsubmit="sendData">
+  <div class="form-group">
+    <label >Nombre</label>
+    <input @bind="Name" type="email" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label >Correo electronico</label>
+    <input @bind="Correo" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label >Numero de telefono</label>
+    <input @bind="numero" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label >Mensaje</label>
+    <input @bind="mensaje" type="text" class="form-control">
+  </div>
+  <button  class="btn btn-info">Enviar</button>
+</form>
+
+    @foreach (UsuarioDTO usuario in usuarios )
+    {
+
+        <p> Hola soy @usuario.Name, quiero contactarme con ustedes por lo siguiente:
+             - @usuario.mensaje </p>
+             <br>
+
+        <ul>
+            <h3>pueden comunicarse conmigo en:</h3>
+            <li>Correo electronico: @usuario.Correo</li>
+            <li>telefono: @usuario.numero</li>
+        </ul>
+    }
+
+
+@code{
+    private string? Name {get;set;} 
+    private string? Correo {get;set;}
+
+    private int numero{get;set;}
+    private string? mensaje {get;set;}
+
+    private List<UsuarioDTO> usuarios = new List<UsuarioDTO>();
+        
+    private void sendData(){
+       if(this.Name != "" && this.Correo != "" && this.numero== 0 && this.mensaje != ""){
+        this.usuarios.Add(new UsuarioDTO(this.Name, this.Correo, this.numero, this.mensaje));
+       }
+        
+
+    }
+
+    public class UsuarioDTO{
+
+        public string? Name {get;set;} 
+        public string? Correo {get;set;}
+        public int numero{get;set;}
+         public string? mensaje {get;set;}
+
+        public UsuarioDTO(string N, string C, int T, string M){
+            this.Name = N;
+            this.Correo = C;
+            this.numero = T;
+            this.mensaje = M;
+
+        }
+    }
+}
